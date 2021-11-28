@@ -15,4 +15,4 @@ for column in gold_data:
 
 scalar = preprocessing.MinMaxScaler()
 gold_data[['Open', 'High', 'Low', 'Close']] = scalar.fit_transform(gold_data[["Open", "High", "Low", "Close"]])
-gold_data.to_csv('data/cleaned/gold_cleaned.csv')
+gold_data.to_csv('data/cleaned/gold_cleaned .csv')
