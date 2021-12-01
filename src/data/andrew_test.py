@@ -9,15 +9,23 @@ import pandas as pd
 # pd.set_option('display.max_columns', None)
 # pd.set_option('display.width', None)
 
-infile = open("all_bond_data_cleaned_seperate", "rb")
-list = pickle.load(infile)
-infile.close()
+df = pd.DataFrame({"col1": [i for i in range(20)]})
 
-combined_df = pd.concat(list, axis = 1, join="inner")
+periods = 5
 
-print(combined_df.describe())
-print(combined_df.isna().sum())
+def periods_to_see_back(df, periods):
 
-print(combined_df)
+    initial_variables = list(df.columns.values)
+
+    for variable in initial_variables:
+        for i in range(1, periods+1):
+            df[f"{variable} t-{i}"] = df[variable].shift(periods = i)
+    
+    df = df.dropna()
+
+    return df
 
 
+dfalt = periods_to_see_back(df, periods)
+
+print(dfalt)
